@@ -16,8 +16,7 @@ class Game{
 
     public function play(){
         ksort($this->checkerBoard->map);
-        $this->step[] = $this->checkerBoard->map;
-        $this->stepMask[] = md5(json_encode($this->checkerBoard->map));
+        $this->saveStep();
         return $this->go();
     }
     public function go(&$laststep = null){
@@ -33,8 +32,6 @@ class Game{
             foreach(['down','up','left','right'] as $direction){
                 $step = new Step($direction,$general);
                 $this->goCount++;
-                $step->stepCount = $this->stepCount;
-                $step->goCount = $this->goCount;
                 if($this->checkMove($general, $step) && $this->move($general, $step)){
                     $this->saveStep();
                     if(!$this->success($general,$step)){
