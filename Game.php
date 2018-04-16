@@ -15,7 +15,6 @@ class Game{
     }
 
     public function play(){
-        ksort($this->checkerBoard->map);
         $this->saveStep();
         return $this->go();
     }
@@ -52,7 +51,6 @@ class Game{
     }
 
     public function saveStep(){
-
         ksort($this->checkerBoard->map);
         $this->stepMask[] = md5(json_encode($this->checkerBoard->map));
         $this->step[] = $this->checkerBoard->map;
